@@ -16,6 +16,18 @@ Or install it yourself as:
 
     $ gem install messenger-ruby
 
+## Configuration
+
+Create `messenger.rb` initializer in you app directory:
+
+```ruby
+# app/config/initializers/messenger.rb
+Messenger.configure do |config|
+  config.verify_token      = '...'
+  config.page_access_token = '...'
+end
+```
+
 ## Usage
 
 TODO: Write usage instructions here
