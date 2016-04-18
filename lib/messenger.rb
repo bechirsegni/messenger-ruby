@@ -18,3 +18,5 @@ module Messenger
     end
   end
 end
+
+require "messenger/engine"
