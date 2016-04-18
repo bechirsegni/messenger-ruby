@@ -1,2 +1,8 @@
 require "bundler/gem_tasks"
-task :default => :spec
+require "rspec/core/rake_task"
+
+task default: :spec
+
+task :console do
+  exec "irb -r messenger -I ./lib"
+end
