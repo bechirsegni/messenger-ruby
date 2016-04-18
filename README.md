@@ -25,7 +25,7 @@ Or install it yourself as:
 Create `messenger.rb` initializer in you app directory:
 
 ```ruby
-# app/config/initializers/messenger.rb
+# YOUR_APP/config/initializers/messenger.rb
 Messenger.configure do |config|
   config.verify_token      = '...'
   config.page_access_token = '...'
