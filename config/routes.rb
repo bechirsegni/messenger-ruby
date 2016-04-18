@@ -1,3 +1,3 @@
 Messenger::Engine.routes.draw do
-  get :webhook
+  get :messenger_webhook, to:  "messenger#webhook"
 end
