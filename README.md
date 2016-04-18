@@ -9,7 +9,7 @@
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'messenger-ruby'
+gem 'messenger-ruby', git: 'https://github.com/netguru/messenger-ruby.git', require: 'messenger'
 ```
 
 And then execute:
