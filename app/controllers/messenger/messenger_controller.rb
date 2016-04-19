@@ -1,7 +1,9 @@
 module Messenger
   class MessengerController < ApplicationController
     def validate
-      #here we will validate facebook's test request
+      if params["hub.verify_token"] == Messenger.config.verify_token
+         render json: params["hub.challenge"]
+      end
     end
 
     def webhook
