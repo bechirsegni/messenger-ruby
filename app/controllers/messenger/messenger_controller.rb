@@ -24,6 +24,8 @@ module Messenger
 
     def activate_bot
       JSON.parse(RestClient.post(app_location, nil)).key?('success')
+    rescue RestClient::BadRequest
+      return false
     end
 
     def page_published?
