@@ -12,10 +12,6 @@ module Messenger
       end
     end
 
-    def webhook
-      #here user will be able to define bot behaviour
-    end
-
     private
 
     def app_location
