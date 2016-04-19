@@ -1,7 +1,7 @@
 require 'rest-client'
 
 module Messenger
-  class MessengerController < ApplicationController
+  class MessengerController < ActionController::Base
     def validate
       if valid_token? && bot_active?
         render json: params["hub.challenge"]
