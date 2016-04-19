@@ -3,6 +3,8 @@ module Messenger
     def validate
       if params["hub.verify_token"] == Messenger.config.verify_token
          render json: params["hub.challenge"]
+      else
+        render json: 'Error, wrong validation token'
       end
     end
 
