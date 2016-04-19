@@ -1,6 +1,13 @@
 require 'messenger-ruby'
 require "codeclimate-test-reporter"
 
+ENV["RAILS_ENV"] ||= 'test'
+
+require File.expand_path("../test_app/config/environment", __FILE__)
+require 'rspec/rails'
+require 'rspec/autorun'
+require 'webmock/rspec'
+
 CodeClimate::TestReporter.start
 SimpleCov.start
 
