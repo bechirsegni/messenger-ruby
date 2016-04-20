@@ -5,6 +5,9 @@ require "messenger/components/text"
 require "messenger/components/image"
 require "messenger/components/button"
 require "messenger/components/bubble"
+require "messenger/components/button_template"
+require "messenger/components/generic_template"
+
 require "messenger/client"
 require "messenger/request"
 
