@@ -20,3 +20,4 @@ module Messenger
 end
 
 require "messenger/engine"
+require "messenger/params"
