@@ -7,19 +7,25 @@ module Messenger
     end
 
     def attachments
-      params['entry'][0]['messaging'][0]['message']['attachments'].map { |a| a['payload']['url'] }
+      messaging_entry['message']['attachments'].map { |a| a['payload']['url'] }
     end
 
     def text_message
-      params['entry'][0]['messaging'][0]['message']['text']
+      messaging_entry['message']['text']
     end
 
     def sender_id
-      params['entry'][0]['messaging'][0]['sender']['id']
+      messaging_entry['sender']['id']
     end
 
     def recipient_id
-      params['entry'][0]['messaging'][0]['recipient']['id']
+      messaging_entry['recipient']['id']
+    end
+
+    private
+
+    def messaging_entry
+      params['entry'][0]['messaging'][0]
     end
   end
 end
