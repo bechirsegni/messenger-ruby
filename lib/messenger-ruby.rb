@@ -1,7 +1,10 @@
 require "messenger/version"
 require "messenger/configuration"
+
 require "messenger/components/text"
 require "messenger/components/image"
+require "messenger/components/button"
+require "messenger/components/bubble"
 require "messenger/client"
 require "messenger/request"
 

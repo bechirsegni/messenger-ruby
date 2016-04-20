@@ -9,6 +9,10 @@ module Messenger
           }
         }
       end
+
+      def build_elements(elements)
+        elements.map { |element| element.build }
+      end
     end
   end
 end
