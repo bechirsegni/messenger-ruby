@@ -14,8 +14,13 @@ module Messenger
         }
       end
 
+      def all_attributes
+        return instance_values unless defined?(flattened_attributes)
+        instance_values.merge! flattened_attributes
+      end
+
       def payload
-        instance_values.select { |attribute, value| allowed_attribute?(attribute) && value.present? }
+        all_attributes.select { |attribute, value| allowed_attribute?(attribute) && value.present? }
       end
 
       def allowed_attribute?(attribute)

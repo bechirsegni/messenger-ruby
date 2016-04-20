@@ -14,6 +14,7 @@ require "messenger/components/elements/receipt/summary"
 
 require "messenger/components/templates/buttons"
 require "messenger/components/templates/generic"
+require "messenger/components/templates/receipt"
 
 require "messenger/client"
 require "messenger/request"
