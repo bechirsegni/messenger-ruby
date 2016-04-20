@@ -10,7 +10,7 @@ module Messenger
     def self.send(data)
       RestClient.post(
         "https://graph.facebook.com/v2.6/me/messages?access_token=#{Messenger.config.page_access_token}",
-        data,
+        data.to_json,
         content_type: :json
       )
     end
