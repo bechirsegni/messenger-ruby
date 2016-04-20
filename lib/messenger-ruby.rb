@@ -1,5 +1,6 @@
 require "messenger/version"
 require "messenger/configuration"
+require "messenger/components/text"
 require "messenger/client"
 require "messenger/request"
 
