@@ -8,7 +8,7 @@ module Messenger
         @type = 'image'
       end
 
-      def information
+      def payload
         { url: @path }
       end
     end

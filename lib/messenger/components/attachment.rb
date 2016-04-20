@@ -5,7 +5,7 @@ module Messenger
         {
           attachment: {
             type: @type,
-            payload: information
+            payload: payload
           }
         }
       end

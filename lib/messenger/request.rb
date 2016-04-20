@@ -1,19 +1,17 @@
 module Messenger
   class Request
-    def initialize(type, content, recipient_id)
-      @type = Object.const_get(type)
-      @content = content
+    def initialize(component, recipient_id)
       @recipient_id = recipient_id
       @body = body
+      add_element(component)
     end
 
     def build
-      add_element
       return @body
     end
 
-    def add_element
-      @body[:message].merge! @type.new(@content).to_hash
+    def add_element(element)
+      @body[:message].merge! element.to_hash
     end
 
     def body
