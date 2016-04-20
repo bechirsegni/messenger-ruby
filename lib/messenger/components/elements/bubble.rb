@@ -1,9 +1,9 @@
 require 'messenger/components/attachment'
 
 module Messenger
-  module Components
+  module Elements
     class Bubble
-      def initialize(title, subtitle, item_url, image_url, buttons)
+      def initialize(title:, subtitle: nil, item_url: nil, image_url: nil, buttons: nil)
         @title = title
         @subtitle = subtitle
         @image_url = image_url
@@ -12,17 +12,11 @@ module Messenger
       end
 
       def build
-        {
-          title: @title,
-          subtitle: @subtitle,
-          image_url: @image_url,
-          item_url: @item_url,
-          buttons: @buttons
-        }
+        instance_values.delete_if { |_attribute, value| value.nil? }
       end
 
       def build_buttons(buttons)
-        buttons.map { |button| button.build }
+        buttons.map { |button| button.build } if buttons.present?
       end
     end
   end

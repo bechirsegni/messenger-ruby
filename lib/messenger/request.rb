@@ -11,7 +11,7 @@ module Messenger
     end
 
     def add_element(element)
-      @body[:message].merge! element.to_hash
+      @body[:message].merge! element.build
     end
 
     def body

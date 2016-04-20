@@ -1,7 +1,7 @@
 module Messenger
-  module Components
+  module Elements
     class Button
-      def initialize(type, title, value)
+      def initialize(type:, title:, value:)
         @type = type
         @title = title
         @value = value

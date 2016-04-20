@@ -1,12 +1,12 @@
 module Messenger
-  module Components
+  module Elements
     class Text
-      def initialize(text)
+      def initialize(text:)
         @text = text
       end
 
-      def to_hash
-        { text: @text }
+      def build
+        instance_values
       end
     end
   end

@@ -1,12 +1,12 @@
 require "messenger/version"
 require "messenger/configuration"
 
-require "messenger/components/text"
-require "messenger/components/image"
-require "messenger/components/button"
-require "messenger/components/bubble"
-require "messenger/components/button_template"
-require "messenger/components/generic_template"
+require "messenger/components/elements/text"
+require "messenger/components/elements/image"
+require "messenger/components/elements/button"
+require "messenger/components/elements/bubble"
+require "messenger/components/templates/buttons"
+require "messenger/components/templates/generic"
 
 require "messenger/client"
 require "messenger/request"
