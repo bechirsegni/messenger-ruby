@@ -1,6 +1,7 @@
 require "messenger/version"
 require "messenger/configuration"
 require "messenger/client"
+require "messenger/request"
 
 module Messenger
   class << self
