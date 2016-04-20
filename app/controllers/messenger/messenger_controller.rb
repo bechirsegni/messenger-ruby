@@ -12,6 +12,12 @@ module Messenger
       end
     end
 
+    def subscribe
+      render json: activate_bot
+    rescue RestClient::BadRequest
+      render json: 'Invalid page access token'
+    end
+
     private
 
     def app_location
@@ -19,9 +25,7 @@ module Messenger
     end
 
     def activate_bot
-      JSON.parse(RestClient.post(app_location, nil)).key?('success')
-    rescue RestClient::BadRequest
-      return false
+      RestClient.post(app_location, nil)
     end
 
     def page_published?
