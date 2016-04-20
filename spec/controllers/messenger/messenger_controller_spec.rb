@@ -13,7 +13,7 @@ module Messenger
     end
 
     describe 'get #validate' do
-      describe 'bot is already activated' do
+      describe 'access page token is correct' do
         before do
           stub_request(:get, app_url).to_return(body: '{"data":[{"name":"Some App"}]}')
         end
@@ -44,7 +44,7 @@ module Messenger
         end
 
         describe 'page_access_token is correct' do
-          before { stub_request(:post, app_url).to_return(body: '{"success":true}') }
+          before { stub_request(:get, app_url).to_return(body: '{"data":[{"name":"Some App"}]}') }
 
           it 'should return `hub.challenge`' do
             get :validate, facebook_params
@@ -53,7 +53,7 @@ module Messenger
         end
 
         describe 'page_access_token is invalid' do
-          before { stub_request(:post, app_url).to_return(status: 400) }
+          before { stub_request(:get, app_url).to_return(status: 400) }
 
           it 'should return message about invalid access token' do
             get :validate, facebook_params
