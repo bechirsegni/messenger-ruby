@@ -1,3 +1,6 @@
 /Gemfile.lock
 /pkg
 /coverage
+
+spec/test_app/config/secrets.yml
+spec/test_app/log/*

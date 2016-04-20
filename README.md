@@ -11,7 +11,7 @@ A simple library for supporting implementation of Facebook Messenger Bots.
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'messenger-ruby', git: 'https://github.com/netguru/messenger-ruby.git'
+gem 'messenger-ruby'
 ```
 
 And then execute:
@@ -29,7 +29,7 @@ Create `messenger.rb` initializer in you app directory:
 ```ruby
 # YOUR_APP/config/initializers/messenger.rb
 Messenger.configure do |config|
-  config.verify_token      = '<YOUR_TOKEN>'
+  config.verify_token      = '<VERIFY_TOKEN>'
   config.page_access_token = '<PAGE_ACCESS_TOKEN>'
 end
 ```
@@ -40,7 +40,7 @@ TODO: Write usage instructions here
 
 ## Development
 
-After checking out the repo, run `bin/setup` to install dependencies. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+After checking out the repo, run `bin/setup` to install dependencies. You can also run `rake console` for an interactive prompt that will allow you to experiment.
 
 To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
 
