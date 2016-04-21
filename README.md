@@ -133,6 +133,7 @@ Used by [Receipt template](#receipt-template).
 
 Example usage:
 ```ruby
+Messenger::Elements::Address.new(street_1: 'Vachel Lindsay Dr', street_2: "", city: "Springfield", postal_code: '62701', state: 'IL', country:'USA')
 ```
 
 #### Adjustment
