@@ -111,7 +111,7 @@ Lives inside [Bubble](#bubble) element or [Button template](#button-template).
 
 Attribute | Allowed values | Required?
 --------- | -------------- | :--------:
-type | `'web_url'`, `'postback'` | &#10004; 
+type | `'web_url'`, `'postback'` | &#10004;
 title | String | &#10004;
 value | String | &#10004;
 
@@ -146,7 +146,7 @@ Used by [Receipt template](#receipt-template).
 
 Attribute | Allowed values | Required?
 --------- | -------------- | :--------:
-street_1 | String | &#10004; 
+street_1 | String | &#10004;
 street_2 | String | &#10008;
 city | String | &#10004;
 postal_code | String | &#10004;
@@ -171,8 +171,8 @@ Used by [Receipt template](#receipt-template).
 
 Attribute | Allowed values | Required?
 --------- | -------------- | :--------:
-name | String | &#10004; 
-amount | Integer, greater than 0 | &#10004; 
+name | String | &#10004;
+amount | Integer, greater than 0 | &#10004;
 
 Example usage:
 ```ruby
@@ -185,12 +185,12 @@ Used by [Receipt template](#receipt-template).
 
 Attribute | Allowed values | Required?
 --------- | -------------- | :--------:
-title | String | &#10004; 
+title | String | &#10004;
 subtilte | String | &#10008;
-quantity | Integer | &#10008; 
-price | Decimal | &#10008; 
-currency | String, from _ISO 4217 Currency Codes_ | &#10008; 
-image_url | String | &#10008; 
+quantity | Integer | &#10008;
+price | Decimal | &#10008;
+currency | String, from _ISO 4217 Currency Codes_ | &#10008;
+image_url | String | &#10008;
 
 Example usage:
 ```ruby
@@ -210,11 +210,11 @@ Used by [Receipt template](#receipt-template).
 
 Attribute | Allowed values | Required?
 --------- | -------------- | :--------:
-order_number | String, unique per conversation | &#10004; 
+order_number | String, unique per conversation | &#10004;
 currency | String, from _ISO 4217 Currency Codes_ | &#10004;
-payment_method | String | &#10004; 
-timestamp | correct timestamp (String) | &#10008; 
-order_url | String | &#10008; 
+payment_method | String | &#10004;
+timestamp | correct timestamp (String) | &#10008;
+order_url | String | &#10008;
 
 Example usage:
 ```ruby
@@ -234,10 +234,10 @@ Used by [Receipt template](#receipt-template).
 
 Attribute | Allowed values | Required?
 --------- | -------------- | :--------:
-subtotal | Decimal | &#10008; 
+subtotal | Decimal | &#10008;
 shipping_cost | Decimal | &#10008;
-total_tax | Decimal | &#10008; 
-total_cost | Decimal | &#10004; 
+total_tax | Decimal | &#10008;
+total_cost | Decimal | &#10004;
 
 Example usage:
 ```ruby
@@ -250,7 +250,7 @@ Messenger::Elements::Summary.new(subtotal: 70, shipping_cost: 20, total_tax: 10,
 
 Attribute | Allowed values | Required?
 --------- | -------------- | :--------:
-text | String | &#10004; 
+text | String | &#10004;
 
 
 Here is complete example on how to send sample text to the user:
@@ -273,7 +273,7 @@ render nothing: true, status: 200
 
 Attribute | Allowed values | Required?
 --------- | -------------- | :--------:
-url | String | &#10004; 
+url | String | &#10004;
 
 
 Sending images is simple as well:
@@ -292,25 +292,65 @@ Messenger::Client.send(
 
 Attribute | Allowed values | Required?
 --------- | -------------- | :--------:
-elements | Array of [Messenger::Elements::Bubble](#bubble) objects | &#10004; 
+elements | Array of [Messenger::Elements::Bubble](#bubble) objects | &#10004;
 
 #### Button template
 
 Attribute | Allowed values | Required?
 --------- | -------------- | :--------:
 text | String | &#10004;
-buttons | Array of [Messenger::Elements::Button](#button) objects | &#10004; 
+buttons | Array of [Messenger::Elements::Button](#button) objects | &#10004;
 
 #### Receipt template
 
 Attribute | Allowed values | Required?
 --------- | -------------- | :--------:
-recipient_name | String | &#10004; 
-order | [Messenger::Elements::Order](#order) object | &#10004; 
-elements | Array of [Messenger::Elements::Item](#item) objects | &#10004; 
+recipient_name | String | &#10004;
+order | [Messenger::Elements::Order](#order) object | &#10004;
+elements | Array of [Messenger::Elements::Item](#item) objects | &#10004;
 address | [Messenger::Elements::Address](#address) object | &#10008;
 summary | [Messenger::Elements::Summary](#summary) object | &#10004;
-adjustments | Array of [Messenger::Elements::Adjustment](#adjustment) objects | &#10008; 
+adjustments | Array of [Messenger::Elements::Adjustment](#adjustment) objects | &#10008;
+
+Example usage:
+```ruby
+if fb_params.message?
+
+  #define order element here...
+  order = Messenger::Elements::Order.new(
+    order_number: 'R190581345',
+    currency: 'USD',
+    payment_method: 'Visa',
+    timestamp: '1428444852',
+    order_url: 'http://petersapparel.parseapp.com/order?order_id=123456'
+  )
+
+  #and define all other template elements
+  item1 = ...
+  item2 = ...
+  address = ...
+  summary = ...
+  adjustment1 = ...
+  adjustment2 = ...
+
+  #lets create Receipt template
+  receipt = Messenger::Templates::Receipt.new(
+    recipient_name: 'Random Recipient',
+    order: order,
+    elements: [item1, item2],
+    address: address,
+    summary: summary,
+    adjustments: [adjustment1, adjustment2]
+  )
+
+  #now send Receipt template to the user
+
+  Messenger::Client.send(
+    Messenger::Request.new(receipt, fb_params.sender_id)
+  )
+end
+render nothing: true, status: 200
+```
 
 ## Development
 
