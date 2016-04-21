@@ -157,6 +157,14 @@ Used by [Receipt template](#receipt-template).
 
 Example usage:
 ```ruby
+Messenger::Elements::Item.new(
+  title: 'Cool Tshirt',
+  subtitle: 'XXL White',
+  quantity: 3,
+  price: 34,
+  currency: 'USD',
+  image_url: 'http://assets.servedby-buysellads.com/p/manage/asset/id/25397'
+)
 ```
 
 #### Order
