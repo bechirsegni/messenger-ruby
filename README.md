@@ -173,6 +173,7 @@ Used by [Receipt template](#receipt-template).
 
 Example usage:
 ```ruby
+Messenger::Elements::Summary.new(subtotal: 70, shipping_cost: 20, total_tax: 10, total_cost: 100)
 ```
 
 ### Components
