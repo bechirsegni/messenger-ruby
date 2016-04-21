@@ -4,7 +4,7 @@
 [![](http://img.shields.io/codeclimate/github/netguru/messenger-ruby.svg?style=flat-square)](https://codeclimate.com/github/netguru/messenger-ruby)
 [![](http://img.shields.io/codeclimate/coverage/github/netguru/messenger-ruby.svg?style=flat-square)](https://codeclimate.com/github/netguru/messenger-ruby)
 
-A simple library for supporting implementation of Facebook Messenger Bots.
+A simple library for supporting implementation of [Facebook Messenger Bots](https://developers.facebook.com/products/messenger/).
 
 ## Installation
 
@@ -28,16 +28,16 @@ Or install it yourself as:
 
 * [create Facebook page](https://www.facebook.com/pages/create/) (skip if you want to use existing page)
 * [create Facebook app](https://developers.facebook.com/quickstarts/?platform=web) (skip if you want to use existing app)
-* go to [Facebook for Developers](https://developers.facebook.com/apps/) and get Page Access Token (step __3. Get Page Access Token__ from [this tutorial](https://developers.facebook.com/docs/messenger-platform/quickstart#steps]))
+* go to [Facebook for Developers](https://developers.facebook.com/apps/) and get `Page Access Token` (step __3. Get Page Access Token__ from [this tutorial](https://developers.facebook.com/docs/messenger-platform/quickstart#steps]))
 
 #### Initializer
 
-Create `messenger.rb` initializer in you app directory and paste Page Access Token from previous step:
+Create `messenger.rb` initializer in you app directory and paste `Page Access Token` from previous step:
 
 ```ruby
 # YOUR_APP/config/initializers/messenger.rb
 Messenger.configure do |config|
-  config.verify_token      = '<VERIFY_TOKEN>' #it will be used in webhook verifiction
+  config.verify_token      = '<VERIFY_TOKEN>' #will be used in webhook verifiction
   config.page_access_token = '<PAGE_ACCESS_TOKEN>'
 end
 ```
@@ -77,6 +77,8 @@ Run your application and:
 * visit `/messenger/subscribe` in your app (it's replacement for __[4. Subscribe the App to the Page](https://developers.facebook.com/docs/messenger-platform/quickstart#steps)__ step) - call `subscribe` action anytime you want to refresh subscription of your app
 
 ## Usage
+
+To send message you need to create one of the available [components](#components), create [Messenger::Request](#messenger-request) with created component and pass it to [Messenger::Client](#messenger-client)::send method. You can send message only to users who subscribed to your page (p.e. sent some message before).
 
 ### Messenger::Request
 
@@ -127,7 +129,7 @@ Part of [Generic template](#button-template).
 Attribute | Allowed values | Required?
 --------- | -------------- | :--------:
 title | String | &#10004;
-subtitle | Subtitle | &#10004;*
+subtitle | String | &#10004;*
 image_url | String  | &#10004;*
 buttons | [`Messenger::Elements::Button`](#button) objects array | &#10004;*
 item_url | String | &#10008;
@@ -245,6 +247,8 @@ Messenger::Elements::Summary.new(subtotal: 70, shipping_cost: 20, total_tax: 10,
 ```
 
 ### Components
+
+You can find more info about what can be send in [Messenger Platform Docs](https://developers.facebook.com/docs/messenger-platform/send-api-reference).
 
 #### Text
 
