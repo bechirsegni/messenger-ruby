@@ -149,6 +149,7 @@ Used by [Receipt template](#receipt-template).
 
 Example usage:
 ```ruby
+Messenger::Elements::Adjustment.new(name: 'Adjustment 1', amount: 20)
 ```
 
 #### Item
