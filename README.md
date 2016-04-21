@@ -24,19 +24,160 @@ Or install it yourself as:
 
 ## Configuration
 
-Create `messenger.rb` initializer in you app directory:
+#### Facebook steps
+
+* [create Facebook page](https://www.facebook.com/pages/create/) (skip if you want to use existing page)
+* [create Facebook app](https://developers.facebook.com/quickstarts/?platform=web) (skip if you want to use existing app)
+* go to [Facebook for Developers](https://developers.facebook.com/apps/) and get Page Access Token (step __3. Get Page Access Token__ from [this tutorial](https://developers.facebook.com/docs/messenger-platform/quickstart#steps]))
+
+#### Initializer
+
+Create `messenger.rb` initializer in you app directory and paste Page Access Token from previous step:
 
 ```ruby
 # YOUR_APP/config/initializers/messenger.rb
 Messenger.configure do |config|
-  config.verify_token      = '<VERIFY_TOKEN>'
+  config.verify_token      = '<VERIFY_TOKEN>' #it will be used in webhook verifiction
   config.page_access_token = '<PAGE_ACCESS_TOKEN>'
 end
 ```
 
+#### Routes
+
+Add to your `routes.rb`:
+
+```ruby
+# YOUR_APP/config/routes.rb
+mount Messenger::Engine, at: "/messenger"
+
+```
+
+#### Controller
+
+Create `messenger_controller.rb` in your controllers directory - controller has to inherit from `Messenger::MessengerController`:
+
+```ruby
+# YOUR_APP/app/controllers/messenger_controller.rb
+class MessengerController < Messenger::MessengerController
+  def webhook
+    #logic here
+    render nothing: true, status: 200
+  end
+end
+```
+
+`2XX` status is necessary to not clog your bot.
+
+If you want your controller to be named differently, please update your `routes.rb` with appropriate route for `post /messenger/webhook` request.
+
+#### Bot subscription
+
+Run your application and:
+* complete step __2. Setup Webhook__ from [this tutorial](https://developers.facebook.com/docs/messenger-platform/quickstart#steps) - _if you mounted `Messenger::Engine` at `/messenger` and your application can be found at `https://example.com`, your `Callback URL` will be `https://example.com/messenger/webhook`_
+* visit `/messenger/subscribe` in your app (it's replacement for __[4. Subscribe the App to the Page](https://developers.facebook.com/docs/messenger-platform/quickstart#steps)__ step) - call `subscribe` action anytime you want to refresh subscription of your app
+
 ## Usage
 
-TODO: Write usage instructions here
+### Messenger::Request
+
+It's used to build parameters for Facebook API. Requires [component](#components) and `recipient_id`.
+
+Example usage:
+```ruby
+Messenger::Request.new(some_component, recipient_id)
+```
+
+### Messenger::Client
+
+Sends requests to Facebook API. Has to methods:
+* `get_user_profile` - requires id of existing facebook user
+* `send` - requires [Messenger::Request](#messengerrequest) object
+
+Example usage:
+```ruby
+Messenger::Client.get_user_profile(user_id) #=> hash with name, surname and profile picture
+Messenger::Client.send(request) #=> hash with message details or exception if request is incorrect
+```
+
+Please note that unsuccessful `send` will be shown in logs as `Facebook API response from invalid request: ...`
+
+### Elements
+
+Elements can't be used outside of templates.
+
+#### Button
+
+Lives inside [Bubble](#bubble) element or [Button template](#button-template). It requires `type`, `title` and `value`.
+Allowed types: `"web_url"` and `"postback"`.
+
+Example usage:
+```ruby
+Messenger::Elements::Button.new(type: "web_url", title: "Button", value: "http://github.com")
+```
+
+#### Bubble
+
+Part of [Generic template](#button-template). Requires `title` and at least one attribute from `subtitle`, `image_ul` and `buttons`. Optional argument: `item_url`
+
+`buttons` - Array of [`Messenger::Elements::Button`](#button) objects.
+
+Example usage:
+```ruby
+Messenger::Elements::Bubble.new(title: "First", subtitle: "Bubble")
+
+```
+
+#### Address
+
+Used by [Receipt template](#receipt-template).
+
+Example usage:
+```ruby
+```
+
+#### Adjustment
+
+Used by [Receipt template](#receipt-template).
+
+Example usage:
+```ruby
+```
+
+#### Item
+
+Used by [Receipt template](#receipt-template).
+
+Example usage:
+```ruby
+```
+
+#### Order
+
+Used by [Receipt template](#receipt-template).
+
+Example usage:
+```ruby
+```
+
+#### Summary
+
+Used by [Receipt template](#receipt-template).
+
+Example usage:
+```ruby
+```
+
+### Components
+
+#### Text
+
+#### Image
+
+#### Generic template
+
+#### Button template
+
+#### Receipt template
 
 ## Development
 
