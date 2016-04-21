@@ -332,6 +332,27 @@ Attribute | Allowed values | Required?
 text | String | &#10004;
 buttons | Array of [Messenger::Elements::Button](#button) objects | &#10004;
 
+Example usage:
+```ruby
+
+#lets create Buttons template
+buttons = Messenger::Templates::Buttons.new(
+  text: 'Some Cool Text',
+  buttons: [
+    Messenger::Elements::Button.new(
+      type: 'web_url',
+      url: 'https://petersapparel.parseapp.com',
+      title: 'Show Website'
+    )
+  ]
+)
+
+#now send Buttons template to the user
+Messenger::Client.send(
+  Messenger::Request.new(buttons, fb_params.sender_id)
+)
+```
+
 #### Receipt template
 
 Attribute | Allowed values | Required?
