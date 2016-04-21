@@ -89,7 +89,7 @@ Messenger::Request.new(some_component, recipient_id)
 
 ### Messenger::Client
 
-Sends requests to Facebook API. Has to methods:
+Sends requests to Facebook API. Has two methods:
 * `get_user_profile` - requires id of existing facebook user
 * `send` - requires [Messenger::Request](#messengerrequest) object
 
@@ -111,13 +111,13 @@ Lives inside [Bubble](#bubble) element or [Button template](#button-template).
 
 Attribute | Allowed values | Required?
 --------- | -------------- | :--------:
-type | "web_url", "postback" | &#10004; 
+type | `'web_url'`, `'postback'` | &#10004; 
 title | String | &#10004;
 value | String | &#10004;
 
 Example usage:
 ```ruby
-Messenger::Elements::Button.new(type: "web_url", title: "Button", value: "http://github.com")
+Messenger::Elements::Button.new(type: 'web_url', title: 'Button', value: 'http://github.com')
 ```
 
 #### Bubble
@@ -136,7 +136,7 @@ item_url | String | &#10008;
 
 Example usage:
 ```ruby
-Messenger::Elements::Bubble.new(title: "First", subtitle: "Bubble")
+Messenger::Elements::Bubble.new(title: 'First', subtitle: 'Bubble')
 
 ```
 
@@ -157,8 +157,8 @@ Example usage:
 ```ruby
 Messenger::Elements::Address.new(
   street_1: 'Vachel Lindsay Dr',
-  street_2: "",
-  city: "Springfield",
+  street_2: '',
+  city: 'Springfield',
   postal_code: '62701',
   state: 'IL',
   country:'USA'
@@ -248,13 +248,18 @@ Messenger::Elements::Summary.new(subtotal: 70, shipping_cost: 20, total_tax: 10,
 
 #### Text
 
+Attribute | Allowed values | Required?
+--------- | -------------- | :--------:
+text | String | &#10004; 
+
+
 Here is complete example on how to send sample text to the user:
 ```ruby
 fb_params = Messenger::Params.new(params)
 if fb_params.message?
   Messenger::Client.send(
     Messenger::Request.new(
-      Messenger::Elements::Text.new(text: "some text"),
+      Messenger::Elements::Text.new(text: 'some text'),
       fb_params.sender_id
     )
   )
@@ -265,6 +270,11 @@ render nothing: true, status: 200
 ```
 
 #### Image
+
+Attribute | Allowed values | Required?
+--------- | -------------- | :--------:
+url | String | &#10004; 
+
 
 Sending images is simple as well:
 ```ruby
@@ -280,9 +290,27 @@ Messenger::Client.send(
 
 #### Generic template
 
+Attribute | Allowed values | Required?
+--------- | -------------- | :--------:
+elements | Array of [Messenger::Elements::Bubble](#bubble) objects | &#10004; 
+
 #### Button template
 
+Attribute | Allowed values | Required?
+--------- | -------------- | :--------:
+text | String | &#10004;
+buttons | Array of [Messenger::Elements::Button](#button) objects | &#10004; 
+
 #### Receipt template
+
+Attribute | Allowed values | Required?
+--------- | -------------- | :--------:
+recipient_name | String | &#10004; 
+order | [Messenger::Elements::Order](#order) object | &#10004; 
+elements | Array of [Messenger::Elements::Item](#item) objects | &#10004; 
+address | [Messenger::Elements::Address](#address) object | &#10008;
+summary | [Messenger::Elements::Summary](#summary) object | &#10004;
+adjustments | Array of [Messenger::Elements::Adjustment](#adjustment) objects | &#10008; 
 
 ## Development
 
