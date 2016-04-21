@@ -188,6 +188,17 @@ render nothing: true, status: 200
 
 #### Image
 
+Sending images is simple as well:
+```ruby
+...
+data = Messenger::Request.new(
+  Messenger::Elements::Image.new(url: 'http://lorempixel.com/400/400/cats'),
+  fb_params.sender_id
+)
+Messenger::Client.send(data)
+...
+```
+
 #### Generic template
 
 #### Button template
