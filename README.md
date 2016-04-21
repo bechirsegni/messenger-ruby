@@ -294,6 +294,37 @@ Attribute | Allowed values | Required?
 --------- | -------------- | :--------:
 elements | Array of [Messenger::Elements::Bubble](#bubble) objects | &#10004;
 
+Example usage:
+```ruby
+
+#define bubbles here...
+bubble1 = Messenger::Elements::Bubble.new(
+  title: 'Bubble 1',
+  subtitle: 'Cool Bubble',
+  item_url: 'http://lorempixel.com/400/400/cats',
+  image_url: 'http://lorempixel.com/400/400/cats',
+  buttons: [
+    Messenger::Elements::Button.new(
+      type: 'web_url',
+      url: 'https://petersapparel.parseapp.com',
+      title: 'Show Website'
+    )
+  ]
+)
+
+bubble2 = ...
+
+#lets create Generic template
+generic = Messenger::Templates::Generic.new(
+  elements: [bubble1, bubble2]
+)
+
+#now send Generic template to the user
+Messenger::Client.send(
+  Messenger::Request.new(generic, fb_params.sender_id)
+)
+```
+
 #### Button template
 
 Attribute | Allowed values | Required?
