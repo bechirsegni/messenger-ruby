@@ -13,6 +13,8 @@ module Messenger
         data.build.to_json,
         content_type: :json
       )
+    rescue RestClient::ExceptionWithResponse => err
+      puts "\nFacebook API response from invalid request:\n#{err.response}\n\n"
     end
   end
 end
