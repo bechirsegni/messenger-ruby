@@ -78,7 +78,7 @@ Run your application and:
 
 ## Usage
 
-To send message you need to create one of the available [components](#components), create [Messenger::Request](#messenger-request) with created component and pass it to [Messenger::Client](#messenger-client)::send method. You can send message only to users who subscribed to your page (p.e. sent some message before).
+To send message you need to create [Messenger::Request](#messengerrequest) with one of the available [components](#components) and pass it to [Messenger::Client](#messengerclient)::send method. You can send message only to users who subscribed to your page (e.g. sent some message before). 
 
 ### Messenger::Request
 
@@ -259,7 +259,6 @@ text | String | &#10004;
 
 Here is complete example on how to send sample text to the user:
 ```ruby
-fb_params = Messenger::Params.new(params)
 if fb_params.message?
   Messenger::Client.send(
     Messenger::Request.new(
@@ -403,6 +402,20 @@ Messenger::Client.send(
 )
 
 ```
+
+### fb_params
+
+Deserializes params recived from Facebook. Available in MessengerController. Methods:
+
+* `message?`
+* `delivery?`
+* `postback?`
+* `attachments`
+* `text_message`
+* `sender_id`
+* `recipient_id`
+
+_Will be extended soon._
 
 ## Development
 
