@@ -175,11 +175,12 @@ Here is complete example on how to send sample text to the user:
 ```ruby
 fb_params = Messenger::Params.new(params)
 if fb_params.message?
-  data = Messenger::Request.new(
-    Messenger::Elements::Text.new(text: "some text"),
-    fb_params.sender_id
+  Messenger::Client.send(
+    Messenger::Request.new(
+      Messenger::Elements::Text.new(text: "some text"),
+      fb_params.sender_id
+    )
   )
-  Messenger::Client.send(data)
 end
 
 #make sure to send 200 at the end
@@ -191,11 +192,12 @@ render nothing: true, status: 200
 Sending images is simple as well:
 ```ruby
 ...
-data = Messenger::Request.new(
-  Messenger::Elements::Image.new(url: 'http://lorempixel.com/400/400/cats'),
-  fb_params.sender_id
+Messenger::Client.send(
+  Messenger::Request.new(
+    Messenger::Elements::Image.new(url: 'http://lorempixel.com/400/400/cats'),
+    fb_params.sender_id
+  )
 )
-Messenger::Client.send(data)
 ...
 ```
 
