@@ -107,8 +107,13 @@ Elements can't be used outside of templates.
 
 #### Button
 
-Lives inside [Bubble](#bubble) element or [Button template](#button-template). It requires `type`, `title` and `value`.
-Allowed types: `"web_url"` and `"postback"`.
+Lives inside [Bubble](#bubble) element or [Button template](#button-template).
+
+Attribute | Allowed values | Required?
+--------- | -------------- | :--------:
+type | "web_url", "postback" | &#10004; 
+title | String | &#10004;
+value | String | &#10004;
 
 Example usage:
 ```ruby
@@ -117,9 +122,17 @@ Messenger::Elements::Button.new(type: "web_url", title: "Button", value: "http:/
 
 #### Bubble
 
-Part of [Generic template](#button-template). Requires `title` and at least one attribute from `subtitle`, `image_ul` and `buttons`. Optional argument: `item_url`
+Part of [Generic template](#button-template).
 
-`buttons` - Array of [`Messenger::Elements::Button`](#button) objects.
+Attribute | Allowed values | Required?
+--------- | -------------- | :--------:
+title | String | &#10004;
+subtitle | Subtitle | &#10004;*
+image_url | String  | &#10004;*
+buttons | [`Messenger::Elements::Button`](#button) objects array | &#10004;*
+item_url | String | &#10008;
+
+`*` - at least one of them is required
 
 Example usage:
 ```ruby
@@ -130,6 +143,15 @@ Messenger::Elements::Bubble.new(title: "First", subtitle: "Bubble")
 #### Address
 
 Used by [Receipt template](#receipt-template).
+
+Attribute | Allowed values | Required?
+--------- | -------------- | :--------:
+street_1 | String | &#10004; 
+street_2 | String | &#10008;
+city | String | &#10004;
+postal_code | String | &#10004;
+state | String | &#10004;
+country | String | &#10004;
 
 Example usage:
 ```ruby
@@ -147,6 +169,11 @@ Messenger::Elements::Address.new(
 
 Used by [Receipt template](#receipt-template).
 
+Attribute | Allowed values | Required?
+--------- | -------------- | :--------:
+name | String | &#10004; 
+amount | Integer, greater than 0 | &#10004; 
+
 Example usage:
 ```ruby
 Messenger::Elements::Adjustment.new(name: 'Adjustment 1', amount: 20)
@@ -155,6 +182,15 @@ Messenger::Elements::Adjustment.new(name: 'Adjustment 1', amount: 20)
 #### Item
 
 Used by [Receipt template](#receipt-template).
+
+Attribute | Allowed values | Required?
+--------- | -------------- | :--------:
+title | String | &#10004; 
+subtilte | String | &#10008;
+quantity | Integer | &#10008; 
+price | Decimal | &#10008; 
+currency | String, from _ISO 4217 Currency Codes_ | &#10008; 
+image_url | String | &#10008; 
 
 Example usage:
 ```ruby
@@ -172,6 +208,14 @@ Messenger::Elements::Item.new(
 
 Used by [Receipt template](#receipt-template).
 
+Attribute | Allowed values | Required?
+--------- | -------------- | :--------:
+order_number | String, unique per conversation | &#10004; 
+currency | String, from _ISO 4217 Currency Codes_ | &#10004;
+payment_method | String | &#10004; 
+timestamp | correct timestamp (String) | &#10008; 
+order_url | String | &#10008; 
+
 Example usage:
 ```ruby
 Messenger::Elements::Order.new(
@@ -185,7 +229,15 @@ Messenger::Elements::Order.new(
 
 #### Summary
 
+
 Used by [Receipt template](#receipt-template).
+
+Attribute | Allowed values | Required?
+--------- | -------------- | :--------:
+subtotal | Decimal | &#10008; 
+shipping_cost | Decimal | &#10008;
+total_tax | Decimal | &#10008; 
+total_cost | Decimal | &#10004; 
 
 Example usage:
 ```ruby
