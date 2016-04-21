@@ -314,41 +314,38 @@ adjustments | Array of [Messenger::Elements::Adjustment](#adjustment) objects | 
 
 Example usage:
 ```ruby
-if fb_params.message?
+#define order element here...
+order = Messenger::Elements::Order.new(
+  order_number: 'R190581345',
+  currency: 'USD',
+  payment_method: 'Visa',
+  timestamp: '1428444852',
+  order_url: 'http://petersapparel.parseapp.com/order?order_id=123456'
+)
 
-  #define order element here...
-  order = Messenger::Elements::Order.new(
-    order_number: 'R190581345',
-    currency: 'USD',
-    payment_method: 'Visa',
-    timestamp: '1428444852',
-    order_url: 'http://petersapparel.parseapp.com/order?order_id=123456'
-  )
+#and define all other template elements
+item1 = ...
+item2 = ...
+address = ...
+summary = ...
+adjustment1 = ...
+adjustment2 = ...
 
-  #and define all other template elements
-  item1 = ...
-  item2 = ...
-  address = ...
-  summary = ...
-  adjustment1 = ...
-  adjustment2 = ...
+#lets create Receipt template
+receipt = Messenger::Templates::Receipt.new(
+  recipient_name: 'Random Recipient',
+  order: order,
+  elements: [item1, item2],
+  address: address,
+  summary: summary,
+  adjustments: [adjustment1, adjustment2]
+)
 
-  #lets create Receipt template
-  receipt = Messenger::Templates::Receipt.new(
-    recipient_name: 'Random Recipient',
-    order: order,
-    elements: [item1, item2],
-    address: address,
-    summary: summary,
-    adjustments: [adjustment1, adjustment2]
-  )
+#now send Receipt template to the user
+Messenger::Client.send(
+  Messenger::Request.new(receipt, fb_params.sender_id)
+)
 
-  #now send Receipt template to the user
-  Messenger::Client.send(
-    Messenger::Request.new(receipt, fb_params.sender_id)
-  )
-end
-render nothing: true, status: 200
 ```
 
 ## Development
