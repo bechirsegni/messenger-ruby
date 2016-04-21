@@ -165,6 +165,13 @@ Used by [Receipt template](#receipt-template).
 
 Example usage:
 ```ruby
+Messenger::Elements::Order.new(
+  order_number: 'R190581345',
+  currency: 'USD',
+  payment_method: 'Visa',
+  timestamp: '1428444852',
+  order_url: 'http://petersapparel.parseapp.com/order?order_id=123456'
+)
 ```
 
 #### Summary
