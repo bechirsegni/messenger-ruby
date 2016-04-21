@@ -171,6 +171,21 @@ Example usage:
 
 #### Text
 
+Here is complete example on how to send sample text to the user:
+```ruby
+fb_params = Messenger::Params.new(params)
+if fb_params.message?
+  data = Messenger::Request.new(
+    Messenger::Elements::Text.new(text: "some text"),
+    fb_params.sender_id
+  )
+  Messenger::Client.send(data)
+end
+
+#make sure to send 200 at the end
+render nothing: true, status: 200
+```
+
 #### Image
 
 #### Generic template
