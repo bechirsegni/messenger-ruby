@@ -310,8 +310,8 @@ bubble1 = Messenger::Elements::Bubble.new(
   buttons: [
     Messenger::Elements::Button.new(
       type: 'web_url',
-      url: 'https://petersapparel.parseapp.com',
-      title: 'Show Website'
+      title: 'Show Website',
+      value: 'https://petersapparel.parseapp.com'
     )
   ]
 )
@@ -345,8 +345,8 @@ buttons = Messenger::Templates::Buttons.new(
   buttons: [
     Messenger::Elements::Button.new(
       type: 'web_url',
-      url: 'https://petersapparel.parseapp.com',
-      title: 'Show Website'
+      title: 'Show Website',
+      value: 'https://petersapparel.parseapp.com'
     )
   ]
 )
