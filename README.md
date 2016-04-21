@@ -344,7 +344,6 @@ if fb_params.message?
   )
 
   #now send Receipt template to the user
-
   Messenger::Client.send(
     Messenger::Request.new(receipt, fb_params.sender_id)
   )
