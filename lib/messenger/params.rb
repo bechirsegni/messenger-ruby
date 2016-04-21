@@ -6,6 +6,18 @@ module Messenger
       @params = params
     end
 
+    def message?
+      messaging_entry.key?('message')
+    end
+
+    def delivery?
+      messaging_entry.key?('delivery')
+    end
+
+    def postback?
+      messaging_entry.key?('postback')
+    end
+
     def attachments
       messaging_entry['message']['attachments'].map { |a| a['payload']['url'] }
     end

@@ -1,5 +1,8 @@
 Messenger::Engine.routes.draw do
   get  :subscribe, to: "messenger#subscribe"
   get  :webhook,   to: "messenger#validate"
-  post :webhook,   to: "messenger#webhook"
+end
+
+Rails.application.routes.draw do
+  post 'messenger/webhook', to: "messenger#webhook"
 end

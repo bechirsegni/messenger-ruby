@@ -34,9 +34,12 @@ module Messenger
       return false
     end
 
-
     def verify_token_valid?
       params["hub.verify_token"] == Messenger.config.verify_token
+    end
+
+    def fb_params
+      Params.new(params)
     end
   end
 end
