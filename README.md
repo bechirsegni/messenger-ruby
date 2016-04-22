@@ -4,7 +4,7 @@
 [![](http://img.shields.io/codeclimate/github/netguru/messenger-ruby.svg?style=flat-square)](https://codeclimate.com/github/netguru/messenger-ruby)
 [![](http://img.shields.io/codeclimate/coverage/github/netguru/messenger-ruby.svg?style=flat-square)](https://codeclimate.com/github/netguru/messenger-ruby)
 
-A simple library for supporting implementation of [Facebook Messenger Bots](https://developers.facebook.com/products/messenger/).
+A simple library for supporting implementation of [Facebook Messenger Bot](https://developers.facebook.com/products/messenger/) in Ruby on Rails.
 
 ## Installation
 
