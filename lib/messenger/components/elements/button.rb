@@ -1,6 +1,8 @@
 module Messenger
   module Elements
     class Button
+      attr_accessor :type, :title, :value
+
       def initialize(type:, title:, value:)
         @type = type
         @title = title

@@ -3,6 +3,8 @@ require 'messenger/components/attachment'
 module Messenger
   module Elements
     class Image < Components::Attachment
+      attr_accessor :url
+
       ATTRIBUTES = %w(url).freeze
 
       def initialize(url:)

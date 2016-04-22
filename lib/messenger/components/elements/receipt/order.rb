@@ -3,6 +3,8 @@ require 'messenger/components/element'
 module Messenger
   module Elements
     class Order < Components::Element
+      attr_accessor :order_number, :currency, :payment_method, :timestamp, :order_url
+
       def initialize(order_number:, currency:, payment_method:, timestamp: nil, order_url: nil)
         @order_number = order_number
         @currency = currency

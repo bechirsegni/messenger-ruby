@@ -3,6 +3,8 @@ require 'messenger/components/element'
 module Messenger
   module Elements
     class Bubble < Components::Element
+      attr_accessor :title, :item_url, :image_url, :buttons
+
       def initialize(title:, subtitle: nil, item_url: nil, image_url: nil, buttons: nil)
         @title = title
         @subtitle = subtitle

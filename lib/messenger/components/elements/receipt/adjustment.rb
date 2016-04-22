@@ -3,6 +3,8 @@ require 'messenger/components/element'
 module Messenger
   module Elements
     class Adjustment < Components::Element
+      attr_accessor :name, :amount
+      
       def initialize(name: nil, amount: nil)
         @name = name
         @amount = amount
