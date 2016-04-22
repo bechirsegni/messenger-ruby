@@ -11,7 +11,7 @@ A simple library for supporting implementation of [Facebook Messenger Bot](https
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'messenger-ruby', git: 'https://github.com/netguru/messenger-ruby.git'
+gem 'messenger-ruby'
 ```
 
 And then execute:
