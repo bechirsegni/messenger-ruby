@@ -12,6 +12,30 @@ module Messenger
       subject.instance_eval { app_location }
     end
 
+    describe 'get #subscribe' do
+      describe 'access token is incorrect' do
+        before do
+          stub_request(:post, app_url).to_return(status: 400)
+        end
+
+        it 'should return information about ivalid access token' do
+          get :subscribe
+          expect(response.body).to eq('Invalid page access token')
+        end
+      end
+
+      describe 'access token is incorrect' do
+        before do
+          stub_request(:post, app_url).to_return(body: '{"success":true}')
+        end
+
+        it 'should return response body' do
+          get :subscribe
+          expect(response.body).to eq('{"success":true}')
+        end
+      end
+    end
+
     describe 'get #validate' do
       describe 'access page token is correct' do
         before do
