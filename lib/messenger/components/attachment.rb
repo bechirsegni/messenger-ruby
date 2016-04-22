@@ -1,9 +1,7 @@
 module Messenger
   module Components
-    class Attachment
-      def initialize
-        raise 'This class is abstract!'
-      end
+    module Attachment
+      attr_accessor :type
 
       def build
         {
