@@ -4,7 +4,7 @@ module Messenger
       attr_accessor :type, :title, :value
 
       def initialize(type:, title:, value:)
-        @type = type
+        @type  = type
         @title = title
         @value = value
       end

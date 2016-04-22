@@ -2,7 +2,11 @@ require 'messenger/components/attachment'
 
 module Messenger
   module Templates
-    class Receipt < Components::Attachment
+    class Receipt
+      include Components::Attachment
+
+      attr_accessor :template_type, :recipient_name, :order, :elements, :address, :summary, :adjustments
+
       ATTRIBUTES = %w(
         template_type
         recipient_name
@@ -18,14 +22,14 @@ module Messenger
       ).freeze
 
       def initialize(recipient_name:, order:, elements:, address: nil, summary:, adjustments: nil)
-        @type = 'template'
-        @template_type = 'receipt'
+        @type           = 'template'
+        @template_type  = 'receipt'
         @recipient_name = recipient_name
-        @order = order
-        @elements = build_elements(elements)
-        @address = address.build
-        @summary = summary.build
-        @adjustments = build_elements(adjustments)
+        @order          = order
+        @elements       = build_elements(elements)
+        @address        = address.build
+        @summary        = summary.build
+        @adjustments    = build_elements(adjustments)
       end
 
       def flattened_attributes

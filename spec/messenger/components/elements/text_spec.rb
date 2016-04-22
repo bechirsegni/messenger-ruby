@@ -3,13 +3,13 @@ require 'spec_helper'
 module Messenger
   module Elements
     describe Text do
-      let(:text) do
+      subject do
         described_class.new(text: 'Test')
       end
 
       describe '#build' do
         it 'return correct hash' do
-          expect(text.build).to eq({"text"=>"Test"})
+          expect(subject.build).to eq("text" => "Test")
         end
       end
     end

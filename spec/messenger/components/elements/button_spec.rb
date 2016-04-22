@@ -13,13 +13,21 @@ module Messenger
       describe '#build' do
         describe 'postback type' do
           it 'return hash with type, title and payload' do
-            expect(postback_button.build).to eq({ :type=>"postback", :title=>"Button", :payload=>"test"})
+            expect(postback_button.build).to eq(
+              :type    => "postback",
+              :title   => "Button",
+              :payload => "test"
+            )
           end
         end
 
         describe 'web_url type' do
           it 'return hash with type, title and url' do
-            expect(web_url_button.build).to eq({ :type=>"web_url", :title=>"Button", :url=>"test"})
+            expect(web_url_button.build).to eq(
+              :type  => "web_url",
+              :title => "Button",
+              :url   => "test"
+            )
           end
         end
       end
