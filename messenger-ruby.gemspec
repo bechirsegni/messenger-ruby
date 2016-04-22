@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.authors       = ["justynjozwiak", "mejcz"]
   spec.email         = ["justyn.jozwiak@netguru.pl", "magda.wisniewska@netguru.co"]
 
-  spec.summary       = 'A simple library for supporting implementation of Facebook Messenger Bots.'
+  spec.summary       = 'A library for supporting implementation of Facebook Messenger Bots.'
   spec.homepage      = 'https://github.com/netguru/messenger-ruby'
   spec.license       = "MIT"
 
@@ -18,7 +18,7 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
 
-  spec.add_dependency 'rest-client'
+  spec.add_dependency 'rest-client', ">= 1.7.0"
 
   spec.add_development_dependency "bundler"
   spec.add_development_dependency "rake", "~> 10.0"
