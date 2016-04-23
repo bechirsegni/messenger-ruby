@@ -1,9 +1,11 @@
-module Parameters
-  class Postback
-    include Callback
+module Messenger
+  module Parameters
+    class Postback
+      include Callback
 
-    def initialize(payload:)
-      @payload = payload
+      def initialize(payload:)
+        @payload = payload
+      end
     end
   end
 end
