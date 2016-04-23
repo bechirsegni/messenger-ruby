@@ -1,5 +1,6 @@
 module Parameters
   class Message
+    include Callback
 
     def initialize(mid:, seq:, text: nil, attachments: nil)
       @mid         = mid

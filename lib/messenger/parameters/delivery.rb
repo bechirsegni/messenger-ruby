@@ -1,5 +1,6 @@
 module Parameters
   class Delivery
+    include Callback
 
     def initialize(mids: nil, watermark:, seq:)
       @mids      = mids
