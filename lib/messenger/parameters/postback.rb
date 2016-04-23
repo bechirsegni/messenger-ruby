@@ -3,6 +3,8 @@ module Messenger
     class Postback
       include Callback
 
+      attr_accessor :payload
+
       def initialize(payload:)
         @payload = payload
       end

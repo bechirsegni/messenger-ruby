@@ -3,6 +3,8 @@ module Messenger
     class Optin
       include Callback
 
+      attr_accessor :ref
+
       def initialize(ref:)
         @ref = ref
       end

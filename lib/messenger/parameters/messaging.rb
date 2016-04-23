@@ -1,10 +1,12 @@
 module Messenger
   module Parameters
     class Messaging
+      attr_accessor :sender_id, :recipient_id, :callback
+
       def initialize(sender:, recipient:, timestamp:, message: nil, delivery: nil, postback: nil, optin: nil)
-        @sender_id = sender['id']
+        @sender_id    = sender['id']
         @recipient_id = recipient['id']
-        @callback = set_callback(message: message, delivery: delivery, postback: postback, optin: optin)
+        @callback     = set_callback(message: message, delivery: delivery, postback: postback, optin: optin)
       end
 
       def set_callback(callbacks)

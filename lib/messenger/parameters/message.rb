@@ -3,6 +3,8 @@ module Messenger
     class Message
       include Callback
 
+      attr_accessor :mid, :seq, :text, :attachments
+
       def initialize(mid:, seq:, text: nil, attachments: nil)
         @mid         = mid
         @seq         = seq
