@@ -1,20 +1,10 @@
 module Messenger
   module Parameters
     module Callback
-      def message?
-        type == 'message'
-      end
-
-      def delivery?
-        type == 'delivery'
-      end
-
-      def optin?
-        type == 'optin'
-      end
-
-      def postback?
-        type == 'postback'
+      %w(message delivery optin postback).each do |method|
+        define_method("#{method}?") do
+          type.include?(method)
+        end
       end
 
       def type
