@@ -2,7 +2,7 @@ module Messenger
   module Parameters
     class Entry
       attr_accessor :id, :time, :messagings
-      
+
       def initialize(id:, time:, messaging: nil)
         @id         = id
         @time       = time
