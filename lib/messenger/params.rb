@@ -10,6 +10,10 @@ module Messenger
       @entries_objects ||= build_entries
     end
 
+    def first_entry
+      entries[0].messagings[0]
+    end
+
     private
 
     def build_entries
