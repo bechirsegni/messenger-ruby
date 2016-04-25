@@ -78,7 +78,7 @@ Run your application and:
 
 ## Usage
 
-To send message you need to create [Messenger::Request](#messengerrequest) with one of the available [components](#components) and pass it to [Messenger::Client](#messengerclient)::send method. You can send message only to users who subscribed to your page (e.g. sent some message before). 
+To send message you need to create [Messenger::Request](#messengerrequest) with one of the available [components](#components) and pass it to [Messenger::Client](#messengerclient)::send method. You can send message only to users who subscribed to your page (e.g. sent some message before).
 
 ### Messenger::Request
 
@@ -246,6 +246,42 @@ Example usage:
 Messenger::Elements::Summary.new(subtotal: 70, shipping_cost: 20, total_tax: 10, total_cost: 100)
 ```
 
+### Entries
+
+According to Facebook documentation, there is possibility that you can receive multiple `entries` and multiple `messagings`.
+That's why we made it easy for you to iterate over `entries` and `messagings`, but we've also created `first_entry` method
+that returns first entry in `entry` array, because that is the most common case.
+
+Example usage:
+
+```ruby
+fb_params.entries.each do |entry|
+  entry.messagings.each do |messaging|
+    if messaging.callback.message?
+      Messenger::Client.send(
+        Messenger::Request.new(
+          Messenger::Elements::Text.new(text: "Echo: #{messaging.callback.text}"),
+          messaging.sender_id
+        )
+      )
+    end
+  end
+end
+```
+
+Or with `first_entry` method:
+
+```ruby
+if fb_params.first_entry.callback.message?
+  Messenger::Client.send(
+    Messenger::Request.new(
+      Messenger::Elements::Text.new(text: "Echo: #{fb_params.first_entry.callback.text}"),
+      fb_params.first_entry.sender_id
+    )
+  )
+end
+```
+
 ### Components
 
 You can find more info about what can be send in [Messenger Platform Docs](https://developers.facebook.com/docs/messenger-platform/send-api-reference).
@@ -259,11 +295,11 @@ text | String | &#10004;
 
 Here is complete example on how to send sample text to the user:
 ```ruby
-if fb_params.message?
+if fb_params.first_entry.callback.message?
   Messenger::Client.send(
     Messenger::Request.new(
       Messenger::Elements::Text.new(text: 'some text'),
-      fb_params.sender_id
+      fb_params.first_entry.sender_id
     )
   )
 end
@@ -285,7 +321,7 @@ Sending images is simple as well:
 Messenger::Client.send(
   Messenger::Request.new(
     Messenger::Elements::Image.new(url: 'http://lorempixel.com/400/400/cats'),
-    fb_params.sender_id
+    fb_params.first_entry.sender_id
   )
 )
 ...
@@ -324,7 +360,7 @@ generic = Messenger::Templates::Generic.new(
 
 #now send Generic template to the user
 Messenger::Client.send(
-  Messenger::Request.new(generic, fb_params.sender_id)
+  Messenger::Request.new(generic, fb_params.first_entry.sender_id)
 )
 ```
 
@@ -352,7 +388,7 @@ buttons = Messenger::Templates::Buttons.new(
 
 #now send Buttons template to the user
 Messenger::Client.send(
-  Messenger::Request.new(buttons, fb_params.sender_id)
+  Messenger::Request.new(buttons, fb_params.first_entry.sender_id)
 )
 ```
 
@@ -398,24 +434,32 @@ receipt = Messenger::Templates::Receipt.new(
 
 #now send Receipt template to the user
 Messenger::Client.send(
-  Messenger::Request.new(receipt, fb_params.sender_id)
+  Messenger::Request.new(receipt, fb_params.first_entry.sender_id)
 )
 
 ```
 
 ### fb_params
 
-Deserializes params recived from Facebook. Available in MessengerController. Methods:
+Has control over entries. Especially `callback` attribute of `messaging` instance has following methods:
 
 * `message?`
 * `delivery?`
 * `postback?`
+* `optin?`
 * `attachments`
-* `text_message`
-* `sender_id`
-* `recipient_id`
+* `text`
 
-_Will be extended soon._
+Example usage:
+
+```ruby
+fb_params.first_entry.callback.message?
+fb_params.first_entry.callback.postback?
+fb_params.first_entry.callback.delivery?
+fb_params.first_entry.callback.optin?
+fb_params.first_entry.callback.attachments
+fb_params.first_entry.callback.text
+```
 
 ## Development
 
