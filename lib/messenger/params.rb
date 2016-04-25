@@ -6,38 +6,22 @@ module Messenger
       @params = params
     end
 
-    def message?
-      messaging_entry.key?('message')
-    end
-
-    def delivery?
-      messaging_entry.key?('delivery')
-    end
-
-    def postback?
-      messaging_entry.key?('postback')
-    end
-
-    def attachments
-      messaging_entry['message']['attachments'].map { |a| a['payload']['url'] }
-    end
-
-    def text_message
-      messaging_entry['message']['text']
-    end
-
-    def sender_id
-      messaging_entry['sender']['id']
-    end
-
-    def recipient_id
-      messaging_entry['recipient']['id']
+    def entries
+      @entries_objects ||= build_entries
     end
 
     private
 
-    def messaging_entry
-      params['entry'][0]['messaging'][0]
+    def build_entries
+      entries_objects = []
+      params['entry'].each do |entry|
+        entries_objects << Messenger::Parameters::Entry.new({
+          "id"=>entry["id"],
+          "time"=>entry["time"],
+          "messaging"=>entry['messaging']
+        }.symbolize_keys)
+      end
+      entries_objects
     end
   end
 end
