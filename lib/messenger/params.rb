@@ -18,7 +18,7 @@ module Messenger
         entries_objects << Messenger::Parameters::Entry.new({
           "id"=>entry["id"],
           "time"=>entry["time"],
-          "messaging"=>entry['messaging']
+          "messaging"=>entry["messaging"]
         }.symbolize_keys)
       end
       entries_objects
