@@ -8,6 +8,8 @@ require 'rspec/rails'
 require 'rspec/autorun'
 require 'webmock/rspec'
 
+WebMock.disable_net_connect!(:allow => "codeclimate.com")
+
 CodeClimate::TestReporter.start
 SimpleCov.start
 
