@@ -5,11 +5,17 @@ module Messenger
     routes { Messenger::Engine.routes }
 
     let(:facebook_params) do
-      { 'hub.verify_token' => "TEST_TOKEN", 'hub.challenge' => 'test_challenge' }
+      { 'hub.verify_token' => 'TEST_TOKEN', 'hub.challenge' => 'test_challenge' }
     end
 
     let(:app_url) do
       subject.instance_eval { app_location }
+    end
+
+    describe '#fb_params' do
+      it 'should return Params object' do
+        expect(controller.send(:fb_params)).to be_a(Params)
+      end
     end
 
     describe 'get #subscribe' do

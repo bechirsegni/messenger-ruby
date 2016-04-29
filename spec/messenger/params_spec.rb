@@ -20,7 +20,7 @@ module Messenger
       }
     end
 
-    subject { described_class.new(params)}
+    subject { described_class.new(params) }
 
     describe '#entries' do
       it 'returns array of Entry objects' do

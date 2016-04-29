@@ -27,7 +27,7 @@ module Messenger
         @recipient_name = recipient_name
         @order          = order
         @elements       = build_elements(elements)
-        @address        = address.build
+        @address        = address.build if address.present?
         @summary        = summary.build
         @adjustments    = build_elements(adjustments)
       end
